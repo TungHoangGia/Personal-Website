@@ -123,6 +123,7 @@ strike {
 }
 
 a {
+  outline: none;
   color: var(--text-color);
   text-decoration: none;
   will-change: transform;
