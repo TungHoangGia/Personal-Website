@@ -743,34 +743,94 @@
   });
 })();
 
+
 ;(function () {
-  document.addEventListener("DOMContentLoaded", function () {
-    const circle = document.getElementById('circle');
-    let isDragging = false, offsetX = 0, offsetY = 0;
-
-    circle.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      offsetX = e.clientX - circle.offsetLeft;
-      offsetY = e.clientY - circle.offsetTop;
-      circle.style.cursor = 'grabbing';
-      circle.style.transition = 'none';
+  document.querySelectorAll('div.icon').forEach((icon, index, icons) => {
+    icon.addEventListener('mouseenter', () => {
+      icons.forEach(i => i.style.transform = 'scale(1)');
+      icons[index].style.transform = 'scale(1.4)';
+      if (icons[index - 1]) icons[index - 1].style.transform = 'scale(1.2)';
+      if (icons[index + 1]) icons[index + 1].style.transform = 'scale(1.2)';
     });
 
-    document.addEventListener('mousemove', (e) => {
-      if (isDragging) {
-        circle.style.left = (e.clientX - offsetX) + 'px';
-        circle.style.top = (e.clientY - offsetY) + 'px';
-      }
+    icon.addEventListener('mouseleave', () => {
+      icons.forEach(i => i.style.transform = 'scale(1)');
     });
 
-    document.addEventListener('mouseup', () => {
-      if (isDragging) {
-        isDragging = false;
-        circle.style.cursor = 'grab';
-        circle.style.transition = 'left 3s ease, top 3s ease';
-        circle.style.left = '5px';
-        circle.style.top = '5px';
-      }
+    icon.addEventListener('click', () => {
+      const scale = getComputedStyle(icon).transform;
+      icon.style.setProperty('--current-transform', scale === 'none' ? '' : scale);
+
+      icon.classList.remove('jump');
+      void icon.offsetWidth;
+      icon.classList.add('jump');
     });
   });
 })();
+
+
+
+;(function () {
+  window.onload = () => {
+  const button = document.getElementById('soundButton');
+  const icon = document.getElementById('volumeIcon');
+
+  const deafenSound = new Audio('https://files.catbox.moe/wf5y4r.mp3');
+  const undeafenSound = new Audio('https://files.catbox.moe/okj47p.mp3');
+
+  let muted = false;
+
+  button.addEventListener('click', () => {
+    muted = !muted;
+
+    if (muted) {
+      icon.innerHTML = `
+        <path d="M8.25 3.75L4.5 6.75H1.5V11.25H4.5L8.25 14.25V3.75Z" fill="currentColor"></path>
+        <line x1="12" y1="6" x2="16" y2="12" stroke="currentColor" stroke-width="2"/>
+        <line x1="12" y1="12" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>`;
+      deafenSound.currentTime = 0;
+      deafenSound.play();
+    } else {
+      icon.innerHTML = `
+        <path d="M8.25 3.75L4.5 6.75H1.5V11.25H4.5L8.25 14.25V3.75Z" fill="currentColor"></path>
+        <path d="M14.3 3.7C15.7 5.1 16.5 7.01 16.5 9C16.5 10.99 15.7 12.9 14.3 14.3" stroke="currentColor" stroke-width="1.5" fill="none"></path>
+        <path d="M11.66 6.35C12.36 7.05 12.75 8 12.75 9C12.75 9.99 12.36 10.94 11.66 11.65" stroke="currentColor" stroke-width="1.5" fill="none"></path>`;
+      undeafenSound.currentTime = 0;
+      undeafenSound.play();
+    }
+  });
+};
+})()
+
+;(function () {
+  const text = document.getElementById('slideUpText');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      text.classList.add('visible');
+      observer.unobserve(text); 
+    }
+  });
+}, { threshold: 0.1 });
+
+observer.observe(text);
+})()
+
+;(function () {
+  document.querySelector('[aria-label="Email"]').addEventListener('click', (e) => {
+  e.preventDefault(); // Prevent default link behavior if any
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth'
+  });
+});
+
+;(function () {
+  const icon = document.getElementById('lightToggleButton');
+
+    icon.addEventListener('click', () => {
+    icon.classList.toggle('light');
+  });
+})()
+})()
