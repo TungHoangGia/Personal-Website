@@ -833,4 +833,106 @@ observer.observe(text);
     icon.classList.toggle('light');
   });
 })()
+
+;(function () {
+  window.addEventListener('beforeunload', () => {
+  window.scrollTo(0, 0);
+});
 })()
+
+;(function () {
+  document.getElementById('scrollToTopIcon').addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth'  // Smooth scrolling animation
+  });
+});
+})()
+
+;(function () {
+  const horizontalBar = document.getElementById('horizontalBar');
+  const verticalBar = document.getElementById('verticalBar');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    horizontalBar.classList.add('hidden');
+    verticalBar.style.pointerEvents = 'auto';
+    verticalBar.classList.add('show');
+    verticalBar.style.opacity = '1';
+  } else {
+    horizontalBar.classList.remove('hidden');
+    verticalBar.style.pointerEvents = 'none';
+    verticalBar.style.opacity = '0';
+    verticalBar.classList.add('show');
+  }
+});
+})()
+
+;(function () {
+  const words = [
+    "a Computer - Science Student",
+    "Competitive Programmer",
+    "Artificial Intelligence Specialist",
+    "Proud ex-HSGSer", "Hoang Gia Tung"
+  ];
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const typedEl = document.getElementById('typed');
+
+  function type() {
+    const currentWord = words[wordIndex];
+    let displayedText = currentWord.substring(0, charIndex);
+
+    if (currentWord === "Hoang Gia Tung") {
+      typedEl.innerHTML = `<span class="special">${displayedText}</span>`;
+    } else {
+      typedEl.textContent = displayedText;
+    }
+
+    if (isDeleting) {
+      charIndex--;
+    } else {
+      charIndex++;
+    }
+
+    if (!isDeleting && charIndex === currentWord.length + 1) {
+      isDeleting = true;
+      setTimeout(type, 500); // Pause before deleting
+      return;
+    }
+
+    if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      setTimeout(type, 300); // Pause before typing next word
+      return;
+    }
+
+    const isSpecial = currentWord === "Hoang Gia Tung";
+    const typingSpeed = isSpecial ? 800 : 120;  // Slower speed for special
+    const deletingSpeed = 80;
+
+    setTimeout(type, isDeleting ? deletingSpeed : typingSpeed);
+  }
+
+  type();
+})();
+
+;(function () {
+  const scrollDown = document.querySelector('.scroll-down-container');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) {
+      scrollDown.style.opacity = '0';
+      scrollDown.style.pointerEvents = 'none';
+    } else {
+      scrollDown.style.opacity = '1';
+      scrollDown.style.pointerEvents = 'auto';
+    }
+  });
+})();
+
+})()
+
