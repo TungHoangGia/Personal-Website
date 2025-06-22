@@ -768,40 +768,6 @@
   });
 })();
 
-
-
-;(function () {
-  window.onload = () => {
-  const button = document.getElementById('soundButton');
-  const icon = document.getElementById('volumeIcon');
-
-  const deafenSound = new Audio('https://files.catbox.moe/wf5y4r.mp3');
-  const undeafenSound = new Audio('https://files.catbox.moe/okj47p.mp3');
-
-  let muted = false;
-
-  button.addEventListener('click', () => {
-    muted = !muted;
-
-    if (muted) {
-      icon.innerHTML = `
-        <path d="M8.25 3.75L4.5 6.75H1.5V11.25H4.5L8.25 14.25V3.75Z" fill="currentColor"></path>
-        <line x1="12" y1="6" x2="16" y2="12" stroke="currentColor" stroke-width="2"/>
-        <line x1="12" y1="12" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>`;
-      deafenSound.currentTime = 0;
-      deafenSound.play();
-    } else {
-      icon.innerHTML = `
-        <path d="M8.25 3.75L4.5 6.75H1.5V11.25H4.5L8.25 14.25V3.75Z" fill="currentColor"></path>
-        <path d="M14.3 3.7C15.7 5.1 16.5 7.01 16.5 9C16.5 10.99 15.7 12.9 14.3 14.3" stroke="currentColor" stroke-width="1.5" fill="none"></path>
-        <path d="M11.66 6.35C12.36 7.05 12.75 8 12.75 9C12.75 9.99 12.36 10.94 11.66 11.65" stroke="currentColor" stroke-width="1.5" fill="none"></path>`;
-      undeafenSound.currentTime = 0;
-      undeafenSound.play();
-    }
-  });
-};
-})()
-
 ;(function () {
   const text = document.getElementById('slideUpText');
 
@@ -826,29 +792,8 @@ observer.observe(text);
   });
 });
 
-;(function () {
-  const icon = document.getElementById('lightToggleButton');
 
-    icon.addEventListener('click', () => {
-    icon.classList.toggle('light');
-  });
-})()
 
-;(function () {
-  window.addEventListener('beforeunload', () => {
-  window.scrollTo(0, 0);
-});
-})()
-
-;(function () {
-  document.getElementById('scrollToTopIcon').addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: 'smooth'  // Smooth scrolling animation
-  });
-});
-})()
 
 ;(function () {
   const horizontalBar = document.getElementById('horizontalBar');
@@ -911,7 +856,7 @@ window.addEventListener('scroll', () => {
     }
 
     const isSpecial = currentWord === "Hoang Gia Tung";
-    const typingSpeed = isSpecial ? 800 : 120;  // Slower speed for special
+    const typingSpeed = isSpecial ? 600 : 120;  // Slower speed for special
     const deletingSpeed = 80;
 
     setTimeout(type, isDeleting ? deletingSpeed : typingSpeed);
@@ -936,3 +881,104 @@ window.addEventListener('scroll', () => {
 
 })()
 
+
+;(function () { //house icon
+  document.getElementById('scrollToTopIcon').addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth'  
+  });
+});
+})()
+
+;(function () { //mail
+  document.querySelector('[aria-label="Email"]').addEventListener('click', (e) => {
+  e.preventDefault(); // Prevent default link behavior if any
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth'
+  });
+});
+
+;(function () { 
+  window.addEventListener('beforeunload', () => {
+  window.scrollTo(0, 0);
+});
+})()
+
+;(function () {
+  const buttons = document.querySelectorAll('.light-toggle-button');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.toggle('light')); // Toggle 'light' class on ALL buttons
+    });
+  });
+})();
+
+;(function () { //mail 2
+  document.getElementById('gmail').addEventListener('click', (e) => {
+    e.preventDefault(); 
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
+  });
+})();
+
+;(function () { //house icon2
+  document.getElementById('scrollToTopIcon2').addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth'  
+  });
+});
+})()
+
+;(function () {
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.sound-button');
+
+    const deafenSound = new Audio('https://files.catbox.moe/wf5y4r.mp3');
+    const undeafenSound = new Audio('https://files.catbox.moe/okj47p.mp3');
+
+    let muted = false; // Shared mute status across all buttons
+
+    buttons.forEach(button => {
+      const icon = button.querySelector('.volume-icon');
+
+      button.addEventListener('click', () => {
+        muted = !muted;
+
+        // Update all icons together
+        document.querySelectorAll('.volume-icon').forEach(i => {
+          if (muted) {
+            i.innerHTML = `
+              <path d="M8.25 3.75L4.5 6.75H1.5V11.25H4.5L8.25 14.25V3.75Z" fill="currentColor"></path>
+              <line x1="12" y1="6" x2="16" y2="12" stroke="currentColor" stroke-width="2"/>
+              <line x1="12" y1="12" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>`;
+          } else {
+            i.innerHTML = `
+              <path d="M8.25 3.75L4.5 6.75H1.5V11.25H4.5L8.25 14.25V3.75Z" fill="currentColor"></path>
+              <path d="M14.3 3.7C15.7 5.1 16.5 7.01 16.5 9C16.5 10.99 15.7 12.9 14.3 14.3" stroke="currentColor" stroke-width="1.5" fill="none"></path>
+              <path d="M11.66 6.35C12.36 7.05 12.75 8 12.75 9C12.75 9.99 12.36 10.94 11.66 11.65" stroke="currentColor" stroke-width="1.5" fill="none"></path>`;
+          }
+        });
+
+        // Play sound
+        if (muted) {
+          deafenSound.currentTime = 0;
+          deafenSound.play();
+        } else {
+          undeafenSound.currentTime = 0;
+          undeafenSound.play();
+        }
+      });
+    });
+  });
+})();
+
+
+})()
