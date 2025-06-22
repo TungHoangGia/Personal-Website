@@ -123,7 +123,6 @@ strike {
 }
 
 a {
-  outline: none;
   color: var(--text-color);
   text-decoration: none;
   will-change: transform;
@@ -306,10 +305,8 @@ a:hover {
 }
 
 .icon-bar {
+  --scale: 1;
   position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   background: #161616;
   padding: 10px 15px;
@@ -319,31 +316,35 @@ a:hover {
   opacity: 1;
   transition: opacity 0.4s ease, transform 0.4s ease;
   z-index: 9999;
+  transform-origin: center;
+}
+
+.icon-bar.horizontal {
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%) scale(var(--scale));
+}
+
+.icon-bar.vertical {
+  top: 50%;
+  left: 30px;
+  flex-direction: column;
+  border-radius: 20px;
+  transform: translate(-20px, -50%) scale(var(--scale));
 }
 
 .icon-bar.hidden {
   opacity: 0;
   pointer-events: none;
-  transform: translateX(-50%) translateY(-20px);
-}
-
-.icon-bar.vertical {
-  position: fixed;
-  top: 50%;
-  left: 20px;
-  transform: translate(-20px, -50%);
-  flex-direction: column;
-  border-radius: 20px;
-  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .icon-bar.show {
-  pointer-events: none;
-  transform: translate(0, -50%);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .icon-bar:hover {
-    --scale: 1.2;
+  --scale: 1.2;
 }
 
 .icon {
@@ -493,7 +494,6 @@ a:hover {
 
 .bottomleft {
   position: absolute;
-  bottom: -1110px;
   left: 11px;
   color: #7e7e7e;
   display: inline-block;
