@@ -144,13 +144,13 @@ a:hover {
 @keyframes pulsate {
   0% {
     text-shadow: 0 0 4px var(--text-color), 0 0 10px var(--text-color),
-      0 0 19px var(--text-color), 0 0 38px var(--accent-color),
+      0 0 18px var(--text-color), 0 0 38px var(--accent-color),
       0 0 73px var(--accent-color), 0 0 80px var(--accent-color),
       0 0 94px var(--accent-color), 0 0 140px var(--accent-color);
   }
   100% {
     text-shadow: 0 0 4px var(--text-color), 0 0 11px var(--text-color),
-      0 0 20px var(--text-color), 0 0 40px var(--accent-color),
+      0 0 19px var(--text-color), 0 0 40px var(--accent-color),
       0 0 80px var(--accent-color), 0 0 90px var(--accent-color),
       0 0 100px var(--accent-color), 0 0 150px var(--accent-color);
   }
