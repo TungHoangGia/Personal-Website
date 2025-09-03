@@ -785,7 +785,7 @@ observer.observe(text);
 
 ;(function () {
   document.querySelector('[aria-label="Email"]').addEventListener('click', (e) => {
-  e.preventDefault(); // Prevent default link behavior if any
+  e.preventDefault(); //prevent default link behavior if any
   window.scrollTo({
     top: document.body.scrollHeight,
     behavior: 'smooth'
@@ -816,10 +816,8 @@ window.addEventListener('scroll', () => {
 
 ;(function () {
   const words = [
-    "a Computer - Science Student",
-    "Competitive Programmer",
-    "Artificial Intelligence Specialist",
-    "Proud ex-HSGSer", "Hoang Gia Tung"
+    "a Comp-Sci Student", "an Informatic Student",
+    "a Proud HSGSer", "a CP enjoyer", "Hoang Gia Tung"
   ];
   let wordIndex = 0;
   let charIndex = 0;
@@ -844,19 +842,19 @@ window.addEventListener('scroll', () => {
 
     if (!isDeleting && charIndex === currentWord.length + 1) {
       isDeleting = true;
-      setTimeout(type, 500); // Pause before deleting
+      setTimeout(type, 500); //pause
       return;
     }
 
     if (isDeleting && charIndex === 0) {
       isDeleting = false;
       wordIndex = (wordIndex + 1) % words.length;
-      setTimeout(type, 300); // Pause before typing next word
+      setTimeout(type, 300); //pause
       return;
     }
 
     const isSpecial = currentWord === "Hoang Gia Tung";
-    const typingSpeed = isSpecial ? 600 : 120;  // Slower speed for special
+    const typingSpeed = isSpecial ? 600 : 120;  //lower speed
     const deletingSpeed = 80;
 
     setTimeout(type, isDeleting ? deletingSpeed : typingSpeed);
@@ -894,7 +892,7 @@ window.addEventListener('scroll', () => {
 
 ;(function () { //mail
   document.querySelector('[aria-label="Email"]').addEventListener('click', (e) => {
-  e.preventDefault(); // Prevent default link behavior if any
+  e.preventDefault(); //prevent default link behavior if any
   window.scrollTo({
     top: document.body.scrollHeight,
     behavior: 'smooth'
@@ -912,7 +910,7 @@ window.addEventListener('scroll', () => {
 
   buttons.forEach(button => {
     button.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.toggle('light')); // Toggle 'light' class on ALL buttons
+      buttons.forEach(b => b.classList.toggle('light')); //toggle light
     });
   });
 })();
@@ -944,7 +942,7 @@ window.addEventListener('scroll', () => {
     const deafenSound = new Audio('https://files.catbox.moe/wf5y4r.mp3');
     const undeafenSound = new Audio('https://files.catbox.moe/okj47p.mp3');
 
-    let muted = false; // Shared mute status across all buttons
+    let muted = false; //shared mute status across all buttons
 
     buttons.forEach(button => {
       const icon = button.querySelector('.volume-icon');
@@ -952,7 +950,7 @@ window.addEventListener('scroll', () => {
       button.addEventListener('click', () => {
         muted = !muted;
 
-        // Update all icons together
+        //update all icons together
         document.querySelectorAll('.volume-icon').forEach(i => {
           if (muted) {
             i.innerHTML = `
@@ -967,7 +965,7 @@ window.addEventListener('scroll', () => {
           }
         });
 
-        // Play sound
+        //play sound
         if (muted) {
           deafenSound.currentTime = 0;
           deafenSound.play();
